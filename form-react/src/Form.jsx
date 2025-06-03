@@ -5,31 +5,50 @@ function Form({ onSubmit }) {
   const [cognome, setCognome] = useState('');
   const [email, setEmail] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit({ nome, cognome, email });
+  function handleSubmit(e) {
+    e.preventDefault(); 
+
+    // Passiamo i dati al genitore (App)
+    onSubmit({
+      nome: nome,
+      cognome: cognome,
+      email: email
+    });
+
+    // Puliamo i campi dopo il submit
     setNome('');
     setCognome('');
     setEmail('');
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit}>
-      <div>
-        <label>Nome: </label>
-        <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
-      </div>
-      <div>
-        <label>Cognome: </label>
-        <input type="text" value={cognome} onChange={(e) => setCognome(e.target.value)} />
-      </div>
-      <div>
-        <label>Email: </label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-      </div>
-      <button type="submit">Invia</button>
+      <input
+        type="text"
+        placeholder="Nome"
+        value={nome}
+        onChange={(e) => setNome(e.target.value)}
+        className="form-control mb-2"
+      />
+      <input
+        type="text"
+        placeholder="Cognome"
+        value={cognome}
+        onChange={(e) => setCognome(e.target.value)}
+        className="form-control mb-2"
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="form-control mb-2"
+      />
+      <button type="submit" className="btn btn-primary">
+        Invia
+      </button>
     </form>
   );
 }
 
-export default Form;
+export default Form;

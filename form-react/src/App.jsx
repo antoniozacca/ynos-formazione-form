@@ -1,23 +1,27 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from 'react';
 import Form from './Form';
-import DisplayData from './DisplayData';
+import DatiUtente from './DatiUtente';
 
 function App() {
-  const [formData, setFormData] = useState(null);
+  // Stati per memorizzare i dati inseriti
+  const [nome, setNome] = useState('');
+  const [cognome, setCognome] = useState('');
+  const [email, setEmail] = useState('');
 
-  const handleFormSubmit = (data) => {
-    setFormData(data);
-  };
+  // Funzione che riceve i dati dal form
+  function gestisciSubmit(dati) {
+    setNome(dati.nome);
+    setCognome(dati.cognome);
+    setEmail(dati.email);
+  }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Form Utente</h1>
-      <Form onSubmit={handleFormSubmit} />
-      {formData && <DisplayData data={formData} />}
+    <div className="container mt-5">
+      <h1 className="text-center">Form utente</h1>
+      <Form onSubmit={gestisciSubmit} />
+      <DatiUtente nome={nome} cognome={cognome} email={email} />
     </div>
   );
 }
 
-
-export default App
+export default App;
